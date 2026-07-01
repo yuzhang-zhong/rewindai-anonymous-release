@@ -1,0 +1,260 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">RewindAI Architecture</title>
+  <desc id="desc">A designed framework architecture figure for RewindAI, with colored module blocks, condition groups, autobiographical grounding, simulation loop, and research data/admin layer.</desc>
+  <defs>
+    <marker id="arrowDark" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#4d5662"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#2f6d52"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#345aa8"/>
+    </marker>
+    <marker id="arrowTeal" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#1c6870"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#7a4b9a"/>
+    </marker>
+    <filter id="softShadow" x="-12%" y="-20%" width="124%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#24342d" flood-opacity=".10"/>
+    </filter>
+    <style>
+      .title { font: 700 28px Arial, Helvetica, sans-serif; fill: #111827; }
+      .section-title { font: 700 18px Arial, Helvetica, sans-serif; letter-spacing: .3px; }
+      .node-title { font: 700 16px Arial, Helvetica, sans-serif; fill: #121826; }
+      .node-title-white { font: 700 16px Arial, Helvetica, sans-serif; fill: #ffffff; }
+      .node-small { font: 400 11px Arial, Helvetica, sans-serif; fill: #536160; }
+      .node-small-white { font: 400 11px Arial, Helvetica, sans-serif; fill: #eef7f4; }
+      .edge-label { font: 400 12px Arial, Helvetica, sans-serif; fill: #20242b; }
+      .note { font: 400 11px Arial, Helvetica, sans-serif; fill: #646b73; }
+      .frame { fill: #ffffff; stroke: #b9c1c9; stroke-width: 1.2; rx: 10; ry: 10; }
+      .frame-entry { fill: #f5fbf7; stroke: #b9cfc2; }
+      .frame-ground { fill: #f5f8ff; stroke: #b7c8ec; }
+      .frame-sim { fill: #f4fbfb; stroke: #b4d7dc; }
+      .node { stroke-width: 1.7; rx: 10; ry: 10; filter: url(#softShadow); }
+      .green { fill: #ffffff; stroke: #24663f; }
+      .green-fill { fill: #dff3e7; stroke: #24663f; }
+      .blue { fill: #ffffff; stroke: #2d55aa; }
+      .blue-fill { fill: #dfeaff; stroke: #2d55aa; }
+      .teal { fill: #ffffff; stroke: #1d6871; }
+      .teal-fill { fill: #dff5f4; stroke: #1d6871; }
+      .amber-fill { fill: #fff0ca; stroke: #a56a12; }
+      .purple { fill: #ffffff; stroke: #7b4aa0; }
+      .purple-fill { fill: #efe5ff; stroke: #7b4aa0; }
+      .edge { fill: none; stroke: #4d5662; stroke-width: 1.55; marker-end: url(#arrowDark); }
+      .edge-green { fill: none; stroke: #2f6d52; stroke-width: 1.6; marker-end: url(#arrowGreen); }
+      .edge-blue { fill: none; stroke: #345aa8; stroke-width: 1.6; marker-end: url(#arrowBlue); }
+      .edge-teal { fill: none; stroke: #1c6870; stroke-width: 1.6; marker-end: url(#arrowTeal); }
+      .edge-purple { fill: none; stroke: #7a4b9a; stroke-width: 1.6; marker-end: url(#arrowPurple); }
+      .edge-soft { fill: none; stroke: #747b84; stroke-width: 1.35; marker-end: url(#arrowDark); }
+      .edge-dash { fill: none; stroke: #747b84; stroke-width: 1.35; stroke-dasharray: 6 5; marker-end: url(#arrowDark); }
+      .icon { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; opacity: .82; }
+      .igreen { color: #2d6a4f; }
+      .iblue { color: #2d55aa; }
+      .iteal { color: #1d6871; }
+      .ipurple { color: #7b4aa0; }
+      .iamber { color: #a56a12; }
+      .badge { font: 700 18px Arial, Helvetica, sans-serif; fill: #ffffff; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#ffffff"/>
+  <text class="title" x="22" y="42">RewindAI Architecture</text>
+
+  <!-- Section frames -->
+  <rect class="frame frame-entry" x="22" y="70" width="1308" height="190"/>
+  <circle cx="48" cy="98" r="15" fill="#2d6a4f"/>
+  <text class="badge" x="43" y="104">1</text>
+  <text class="section-title" x="72" y="103" fill="#2d6a4f">PARTICIPANT &amp; COCKPIT</text>
+
+  <rect class="frame frame-ground" x="278" y="298" width="1052" height="260"/>
+  <circle cx="304" cy="326" r="15" fill="#345aa8"/>
+  <text class="badge" x="299" y="332">2</text>
+  <text class="section-title" x="328" y="331" fill="#345aa8">REWINDAI GROUNDING STACK</text>
+
+  <rect class="frame frame-sim" x="278" y="594" width="1052" height="352"/>
+  <circle cx="304" cy="622" r="15" fill="#1d6871"/>
+  <text class="badge" x="299" y="628">3</text>
+  <text class="section-title" x="328" y="627" fill="#1d6871">SIMULATION LOOP</text>
+
+  <!-- Entry nodes -->
+  <rect class="node green-fill" x="58" y="138" width="175" height="70"/>
+  <circle class="icon igreen" cx="84" cy="164" r="7"/>
+  <path class="icon igreen" d="M71 190 C75 178, 93 178, 97 190"/>
+  <text class="node-title" x="104" y="176">Participant</text>
+
+  <rect class="node green-fill" x="430" y="138" width="180" height="70"/>
+  <path class="icon igreen" d="M445 158 h18 v22 h-18 z M450 165 h8 M450 173 h8"/>
+  <text class="node-title" x="528" y="176" text-anchor="middle">Group Assignment</text>
+
+  <rect class="node green-fill" x="918" y="138" width="170" height="70"/>
+  <rect class="icon igreen" x="934" y="156" width="22" height="17" rx="3"/>
+  <path class="icon igreen" d="M941 180 h9 M946 173 v7"/>
+  <text class="node-title" x="1014" y="168" text-anchor="middle">RewindAI</text>
+  <text class="node-title" x="1014" y="190" text-anchor="middle">Web Cockpit</text>
+
+  <path class="edge-green" d="M233 173 H430"/>
+  <text class="edge-label" x="306" y="162">registers</text>
+  <path class="edge-green" d="M610 173 H918"/>
+  <text class="edge-label" x="714" y="162">full experience</text>
+
+  <!-- Group side cards -->
+  <rect class="node green" x="22" y="332" width="132" height="80"/>
+  <text class="node-title" x="88" y="368" text-anchor="middle">Group 1:</text>
+  <text class="node-title" x="88" y="390" text-anchor="middle">Self Reflection</text>
+
+  <rect class="node blue-fill" x="22" y="472" width="132" height="88"/>
+  <text class="node-title" x="88" y="506" text-anchor="middle">Group 2:</text>
+  <text class="node-title" x="88" y="528" text-anchor="middle">Generic AI</text>
+  <text class="node-title" x="88" y="550" text-anchor="middle">Reflection</text>
+
+  <rect class="node purple-fill" x="22" y="624" width="132" height="88"/>
+  <text class="node-title" x="88" y="658" text-anchor="middle">Group 3:</text>
+  <text class="node-title" x="88" y="680" text-anchor="middle">RewindAI</text>
+  <text class="node-title" x="88" y="702" text-anchor="middle">Clone</text>
+
+  <rect class="node green" x="22" y="820" width="132" height="74"/>
+  <text class="node-title" x="88" y="852" text-anchor="middle">Anonymous</text>
+  <text class="node-title" x="88" y="874" text-anchor="middle">Experience</text>
+
+  <!-- Group trunk and cockpit routes -->
+  <path class="edge-soft" d="M520 208 V240 H190 V372 H154"/>
+  <text class="edge-label" x="201" y="242">selects condition</text>
+  <path class="edge-soft" d="M154 372 H190 V516 H154"/>
+  <path class="edge-soft" d="M154 516 H190 V668 H154"/>
+  <path class="edge-soft" d="M154 668 H190 V857 H154"/>
+  <path class="edge-soft" d="M190 372 H252 V280 H1002 V208"/>
+  <text class="edge-label" x="234" y="506">self notes</text>
+  <path class="edge-soft" d="M154 857 H665"/>
+  <text class="edge-label" x="168" y="882">full experience</text>
+  <path class="edge-dash" d="M154 668 H235 V820 H662"/>
+  <text class="edge-label" x="202" y="762">uses model and trace</text>
+
+  <!-- Grounding stack nodes -->
+  <rect class="node blue" x="368" y="392" width="130" height="90"/>
+  <path class="icon iblue" d="M382 416 v17 c0 8, 14 8, 14 0 v-17 M375 433 c0 13, 28 13, 28 0 M389 446 v12"/>
+  <text class="node-title" x="443" y="433" text-anchor="middle">Natural</text>
+  <text class="node-title" x="443" y="455" text-anchor="middle">Interview</text>
+
+  <rect class="node blue-fill" x="590" y="392" width="150" height="90"/>
+  <rect class="icon iblue" x="606" y="414" width="22" height="32" rx="4"/>
+  <path class="icon iblue" d="M612 423 h10 M612 432 h10 M612 440 h10"/>
+  <text class="node-title" x="676" y="433" text-anchor="middle">StorySage</text>
+  <text class="node-title" x="676" y="455" text-anchor="middle">Backend</text>
+
+  <rect class="node blue" x="850" y="334" width="164" height="76"/>
+  <path class="icon iblue" d="M866 350 h17 l9 9 v27 h-26 z M883 350 v10 h9 M872 373 h13"/>
+  <text class="node-title" x="942" y="375" text-anchor="middle">Biography</text>
+
+  <rect class="node blue" x="850" y="458" width="190" height="78"/>
+  <circle class="icon iblue" cx="867" cy="477" r="3.5"/>
+  <circle class="icon iblue" cx="858" cy="502" r="3.5"/>
+  <circle class="icon iblue" cx="880" cy="504" r="3.5"/>
+  <path class="icon iblue" d="M867 481 l-7 17 M870 480 l8 20 M861 502 h15"/>
+  <text class="node-title" x="956" y="491" text-anchor="middle">Relationship and</text>
+  <text class="node-title" x="956" y="513" text-anchor="middle">Decision Graph</text>
+
+  <rect class="node blue-fill" x="1135" y="410" width="158" height="70"/>
+  <path class="icon iblue" d="M1152 435 c-7-8, 7-18, 16-8 c9-6, 18 7, 9 16 c7 9-7 18-16 9 c-9 7-19-4-9-17"/>
+  <text class="node-title" x="1224" y="444" text-anchor="middle">Mental Model</text>
+  <text class="node-title" x="1224" y="466" text-anchor="middle">Draft</text>
+
+  <path class="edge-blue" d="M498 437 H590"/>
+  <text class="edge-label" x="511" y="423">writes</text>
+  <path class="edge-blue" d="M740 437 H784 V372 H850"/>
+  <text class="edge-label" x="766" y="364">extracts</text>
+  <path class="edge-blue" d="M740 437 H784 V497 H850"/>
+  <text class="edge-label" x="768" y="520">extracts</text>
+  <path class="edge-blue" d="M1014 372 H1082 V436 H1135"/>
+  <path class="edge-blue" d="M1040 497 H1082 V454 H1135"/>
+  <text class="edge-label" x="1062" y="476">formulates</text>
+  <path class="edge-blue" d="M1088 173 H1178 V410"/>
+  <text class="edge-label" x="1108" y="282">launches</text>
+
+  <!-- Interview route -->
+  <path class="edge-soft" d="M252 280 V437 H368"/>
+  <text class="edge-label" x="290" y="426">conducts</text>
+
+  <!-- Data side -->
+  <rect class="node purple-fill" x="1415" y="420" width="118" height="210"/>
+  <path class="icon ipurple" d="M1447 458 c0 6, 34 6, 34 0 v44 c0 6-34 6-34 0 z M1447 474 c0 6, 34 6, 34 0"/>
+  <text class="node-title" x="1474" y="532" text-anchor="middle">Research</text>
+  <text class="node-title" x="1474" y="554" text-anchor="middle">Dataset</text>
+
+  <rect class="node purple" x="1415" y="720" width="118" height="108"/>
+  <path class="icon ipurple" d="M1457 736 l17-9 l17 9 v16 c0 14-11 22-17 25 c-6-3-17-11-17-25 z"/>
+  <path class="icon ipurple" d="M1466 752 l6 6 l11-14"/>
+  <text class="node-title" x="1474" y="785" text-anchor="middle">Admin</text>
+  <text class="node-title" x="1474" y="807" text-anchor="middle">Dashboard</text>
+
+  <path class="edge-purple" d="M1293 445 H1415"/>
+  <text class="edge-label" x="1340" y="432">aggregates</text>
+  <path class="edge-purple" d="M1474 630 V720"/>
+  <text class="edge-label" x="1436" y="682">summarizes</text>
+
+  <!-- Simulation loop nodes -->
+  <rect class="node teal" x="355" y="724" width="160" height="70"/>
+  <path class="icon iteal" d="M368 742 h20 v28 h-20 z M376 736 h20 v28 h-20"/>
+  <text class="node-title" x="435" y="756" text-anchor="middle">Public Campus</text>
+  <text class="node-title" x="435" y="778" text-anchor="middle">Deck</text>
+
+  <rect class="node teal-fill" x="705" y="638" width="178" height="70"/>
+  <rect class="icon iteal" x="722" y="656" width="22" height="17" rx="5"/>
+  <path class="icon iteal" d="M728 664 h6 M731 661 v6 M740 662 h.1 M740 667 h.1"/>
+  <text class="node-title" x="804" y="680" text-anchor="middle">simulation-test</text>
+
+  <rect class="node amber-fill" x="1010" y="638" width="140" height="70"/>
+  <path class="icon iamber" d="M1028 656 v34 M1036 671 l9 9 l16-21"/>
+  <text class="node-title" x="1090" y="670" text-anchor="middle">Run 1</text>
+  <text class="node-title" x="1090" y="692" text-anchor="middle">Trace</text>
+
+  <rect class="node teal-fill" x="665" y="812" width="140" height="78"/>
+  <path class="icon iteal" d="M676 830 h24 q6 0 6 6 v12 q0 6-6 6 h-9 l-8 8 v-8 h-7 q-6 0-6-6 v-12 q0-6 6-6"/>
+  <text class="node-title" x="746" y="848" text-anchor="middle">Reflection</text>
+  <text class="node-title" x="746" y="870" text-anchor="middle">Support</text>
+
+  <rect class="node teal" x="900" y="812" width="158" height="70"/>
+  <rect class="icon iteal" x="914" y="830" width="22" height="17" rx="5"/>
+  <text class="node-title" x="990" y="856" text-anchor="middle">simulation-test</text>
+
+  <rect class="node amber-fill" x="1142" y="812" width="132" height="70"/>
+  <path class="icon iamber" d="M1158 830 v34 M1166 845 l9 9 l16-21"/>
+  <text class="node-title" x="1218" y="844" text-anchor="middle">Run 2</text>
+  <text class="node-title" x="1218" y="866" text-anchor="middle">Trace</text>
+
+  <path class="edge-teal" d="M1003 208 V638"/>
+  <text class="edge-label" x="956" y="592">launches</text>
+  <path class="edge-teal" d="M515 759 H640 V673 H705"/>
+  <text class="edge-label" x="524" y="748">samples public cards</text>
+  <path class="edge-teal" d="M883 673 H1010"/>
+  <path class="edge-soft" d="M1150 673 H1415"/>
+  <text class="edge-label" x="1340" y="620">aggregates</text>
+  <path class="edge-soft" d="M1080 708 V858 H1058"/>
+  <text class="edge-label" x="1072" y="782">syncs trace</text>
+  <path class="edge-teal" d="M805 851 H900"/>
+  <text class="edge-label" x="826" y="836">replays</text>
+  <path class="edge-teal" d="M1058 847 H1142"/>
+  <path class="edge-soft" d="M1208 882 V928 H735 V890"/>
+  <text class="edge-label" x="1070" y="930">syncs trace</text>
+  <path class="edge-purple" d="M1274 847 H1415 V720"/>
+  <text class="edge-label" x="1338" y="828">aggregates</text>
+
+  <!-- Reflection condition paths -->
+  <path class="edge-soft" d="M154 372 H185 V851 H665"/>
+  <text class="edge-label" x="216" y="544">self notes</text>
+  <path class="edge-soft" d="M154 516 H640 V851 H665"/>
+  <path class="edge-dash" d="M154 668 H235 V851 H665"/>
+  <path class="edge-soft" d="M154 857 H665"/>
+  <path class="edge-dash" d="M665 437 V638 H705"/>
+  <text class="edge-label" x="596" y="704">syncs trace</text>
+  <path class="edge-dash" d="M735 812 V738 H794 V708"/>
+
+  <!-- Clone similarity / admin feedback -->
+  <path class="edge-purple" d="M1208 882 V925 H1474 V828"/>
+  <text class="edge-label" x="1384" y="932">clone similarity</text>
+  <path class="edge-purple" d="M1533 774 H1570 V520 H1533"/>
+
+  <text class="note" x="292" y="970">Note: simulation-test samples the same public campus deck for all users; RewindAI personalizes reflection and model interpretation, not the game cards.</text>
+</svg>

@@ -1,0 +1,168 @@
+\documentclass[sigconf,review,anonymous]{acmart}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{Bib\TeX}}}
+
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\copyrightyear{2026}
+\acmYear{2026}
+\acmDOI{}
+\acmISBN{}
+\acmConference[UIST '26 Posters]{UIST 2026 Posters}{2026}{TBD}
+
+\usepackage{float}
+\usepackage{booktabs}
+
+% Replace these values after the study is closed.
+\newcommand{\Nself}{--}
+\newcommand{\Ngeneric}{--}
+\newcommand{\Nrewind}{--}
+\newcommand{\Ntotal}{--}
+
+% Compact float spacing for the two-page poster abstract.
+\setlength{\textfloatsep}{7pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{7pt plus 2pt minus 2pt}
+
+% Keeps the draft compilable while figures are being replaced.
+% Remove this macro once all final image files are on Overleaf.
+\newcommand{\safeincludegraphics}[2][]{%
+  \IfFileExists{#2}{\includegraphics[#1]{#2}}{%
+    \fbox{\begin{minipage}[c][0.76in][c]{0.92\linewidth}
+      \centering\scriptsize Missing figure file: \texttt{#2}
+    \end{minipage}}}}
+
+\begin{document}
+
+\title[RewindAI]{RewindAI: Autobiography- and Relationship-Graph-Grounded Reflection for Campus Social Decisions}
+
+\author{Anonymous Author(s)}
+\affiliation{%
+  \institution{Anonymous Institution}
+  \country{Anonymous}
+}
+\renewcommand{\shortauthors}{Anonymous Author(s)}
+
+\begin{abstract}
+Personalized AI systems often ground advice in recent dialogue, short preference profiles, or task-specific examples. Such representations can miss why social choices matter differently across people: decisions are shaped by prior experiences, relationships, obligations, and perceived decision boundaries. We present RewindAI, a prototype that turns natural autobiographical interviews into a decision-centered biography, a relationship-and-decision graph, and a revisable mental-model draft. Users then complete a public campus decision simulation, reflect with one of three supports, and replay a second run. The study compares structured self-reflection, generic LLM reflection, and RewindAI clone reflection. We organize the evaluation around three research questions: whether autobiographical grounding improves perceived specificity and usefulness, whether clone replay captures meaningful choice agreement and mismatch categories, and how users respond to privacy-sensitive model interpretations. RewindAI contributes an inspectable workflow for using life history and relationship context in counterfactual reflection without presenting the system as a clinical diagnosis or a faithful copy of the user.
+\end{abstract}
+
+\keywords{Human-AI interaction, personalized AI, autobiography, relationship graphs, counterfactual reflection, decision support}
+
+\maketitle
+
+\section{Introduction}
+
+AI systems increasingly support reflection, coaching, and everyday decision making. However, many forms of personalization treat the user as a set of preferences or as the most recent conversation. This is limiting for social decisions, where the same action can express different values depending on a person's prior experiences, close relationships, obligations, and tolerance for uncertainty.
+
+Recent work suggests that interviews can ground generative agents that reproduce aspects of individual attitudes and behavior~\cite{park2024generative}. OdysSim further argues that behavioral simulation should be evaluated for social, conversational, cognitive, role-playing, and evaluative behavior rather than optimized only for helpfulness~\cite{zhou2026odyssim}. StorySage demonstrates how multi-agent workflows can elicit and organize autobiographical material over time~\cite{talaei2025storysage}. RewindAI extends this line of work from life-story construction to decision reflection: it asks whether an inspectable, user-correctable model of autobiographical and relationship evidence can support more specific reflection than either unaided writing or generic AI feedback.
+
+Our framing draws on possible selves~\cite{markus1986possible}, functional counterfactual thinking~\cite{epstude2008functional}, and self-distancing~\cite{kross2011making}. We use these ideas as design commitments, not as evidence that the system can reproduce human cognition. RewindAI's clone is therefore a tentative reflective artifact: it can suggest how a current model might act, where it differs from the user, and what the user may want to test next.
+
+\section{Research Questions}
+
+We revise the poster around three research questions.
+
+\begin{itemize}
+  \item \textbf{RQ1: Grounded reflection.} Does RewindAI make post-game reflection feel more specific, useful, and self-relevant than structured self-reflection or generic LLM reflection?
+  \item \textbf{RQ2: Clone agreement and mismatch.} When the clone answers the same first-run simulation cards, how often do its choices match the user's choices, and which card categories produce meaningful mismatches?
+  \item \textbf{RQ3: Interpretability and privacy.} How do users inspect, accept, reject, or correct autobiographical and relationship-based interpretations, and what privacy concerns arise?
+\end{itemize}
+
+\begin{figure}[t]
+  \centering
+  \safeincludegraphics[width=\linewidth,height=0.80in,keepaspectratio]{images/fig1.png}
+  \caption{RewindAI overview. A natural interview produces a decision-centered biography, graph, and mental-model draft. A public campus simulation then returns behavioral traces for reflection and comparison.}
+  \Description{A pipeline from autobiographical dialogue to biography, relationship graph, mental model, simulation-test trace, clone reflection, and second-run comparison.}
+  \label{fig:system}
+\end{figure}
+
+\section{System}
+
+\paragraph{Natural autobiographical grounding.}
+RewindAI begins with a conversational interview rather than a questionnaire. A session coordinator keeps the interview focused on a small number of high-value topics while allowing the user to speak naturally. The interviewer probes for concrete incidents, trade-offs, missing information, relationship pressures, and counterfactual variables. A biography writer then generates an editable narrative with an explicit \emph{Decision Logic Analysis} section.
+
+\paragraph{Relationship and decision graph.}
+The graph builder extracts privacy-safe nodes for the current user, people or roles, decision episodes, values, trade-offs, uncertainties, relationship pressures, and tentative simulation signals. Edges express interpretable relations such as \emph{role expectation}, \emph{value conflict}, \emph{decision boundary}, \emph{emotion trigger}, and \emph{behavioral hypothesis}. The graph is not presented as ground truth; it is a draft that can be regenerated, inspected, and revised.
+
+\paragraph{Mental-model formulation.}
+The formulation agent organizes biography and graph evidence into tentative hypotheses about decision policies, pressure points, and boundaries. It avoids diagnosis and uses language such as ``the current model suggests'' or ``early evidence indicates.'' This formulation grounds the RewindAI clone reflection but does not personalize the game cards themselves.
+
+\paragraph{Simulation-test workflow.}
+The campus simulation uses a shared public deck rather than personalized generated cards. Users complete a first run, review the resulting trace, reflect according to condition, and then complete a second run. In the RewindAI condition, the clone uses the user's current mental-model draft and first-run trace to discuss unchosen paths and possible long-term effects before the second run.
+
+\begin{figure}[t]
+  \centering
+  \safeincludegraphics[width=\linewidth,height=1.05in,keepaspectratio]{images/fig3.png}
+  \caption{Prototype workflow. Users move from interview and model construction to a public campus simulation, reflection, and second-run comparison.}
+  \Description{A RewindAI dashboard with interview, biography, graph, mental model, simulation-test, and reflection steps.}
+  \label{fig:prototype}
+\end{figure}
+
+\section{Study Procedure}
+
+We use a between-subjects design with three study conditions. All participants first complete the same public simulation-test task, then receive condition-specific reflection support, then complete a second run. The three conditions isolate the additional value of personalized autobiographical grounding:
+
+\begin{itemize}
+  \item \textbf{Group 1: Self-reflection.} Participants review their first-run report and write a short private reflection before replay.
+  \item \textbf{Group 2: Generic AI reflection.} Participants chat with a general LLM that only receives the game report, not biography, graph, or mental-model context.
+  \item \textbf{Group 3: RewindAI clone reflection.} Participants first complete an autobiographical interview and generate the biography, graph, and mental-model draft. After the first game run, they discuss choices with the RewindAI clone before replay.
+\end{itemize}
+
+An additional anonymous experience mode allows users to try the full RewindAI flow without being included in the controlled comparison. It is used for usability feedback rather than primary analysis.
+
+\begin{table}[t]
+  \caption{Sample and analysis units. We collect pseudonymous IDs and group assignment; demographic attributes are not required in the current demo to reduce privacy exposure.}
+  \label{tab:sample}
+  \centering
+  \scriptsize
+  \begin{tabular}{@{}p{0.22\columnwidth}p{0.13\columnwidth}p{0.29\columnwidth}p{0.25\columnwidth}@{}}
+    \toprule
+    \textbf{Condition} & \textbf{N} & \textbf{Reflection support} & \textbf{Primary analysis units} \\
+    \midrule
+    Group 1 & \Nself & Written self-reflection & Run 1/2 choices; self-reflection status \\
+    Group 2 & \Ngeneric & Generic LLM chat using game report only & Run 1/2 choices; generic reflection turns \\
+    Group 3 & \Nrewind & RewindAI clone chat using mental model and trace & Interview, model status, clone agreement, run change \\
+    \midrule
+    Total & \Ntotal & -- & Pseudonymous participant records \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Measures and Results by RQ}
+
+\paragraph{RQ1: Grounded reflection.}
+We compare conditions on perceived specificity, usefulness, self-insight, actionability, and confidence to try a second-run strategy. We also measure completion rate, time spent in reflection, number of reflection turns, and whether participants changed at least one repeated decision type in the second run. The expected poster result is reported as condition-level effects with participant-level variation rather than selected anecdotes.
+
+\paragraph{RQ2: Clone agreement and mismatch.}
+For Group 3, the clone answers the same first-run cards using the mental-model draft and trace context. We compute same-card choice agreement as a tentative similarity score, then summarize mismatches by card category, risk level, target resource, and failure mode. This score is not treated as proof that the clone ``is'' the user; it is used to identify where the current model aligns with or misses the user's actual choices.
+
+\paragraph{RQ3: Interpretability and privacy.}
+We log whether participants open biography, graph, or model views; whether they regenerate or revise outputs; and whether they submit experience feedback. Admin views summarize compact metadata, not raw interview text. Qualitative feedback is coded for perceived accuracy, discomfort, desire to correct the model, and whether users understand that simulation traces are tentative evidence.
+
+\begin{figure}[b]
+  \centering
+  \safeincludegraphics[width=\linewidth,height=0.94in,keepaspectratio]{images/fig4.png}
+  \caption{Results will be organized by research question: reflection quality for RQ1, clone choice agreement and mismatch for RQ2, and inspection/correction/privacy feedback for RQ3.}
+  \Description{Aggregate plots summarizing the three research questions and condition-level results.}
+  \label{fig:results}
+\end{figure}
+
+\section{Current Implementation}
+
+The deployed prototype includes authentication, group assignment, bilingual interfaces, a 1000-card bilingual campus simulation deck, trace return from simulation-test to RewindAI, admin dashboards, and deletion controls for test data. The RewindAI dashboard supports biography generation, graph generation with progress feedback, mental-model construction, generic reflection chat for Group 2, and clone reflection chat for Group 3. The graph and biography are rebuilt from user-specific evidence, while the simulation cards remain public and non-personalized.
+
+\section{Limitations and Future Work}
+
+First, RewindAI does not establish the true counterfactual outcome of an unchosen action. Its clone replay is a reflective comparison tool, not a causal simulator. Second, the current game constrains decisions into campus scenarios and directional actions; this improves repeatability but limits ecological validity. Third, the system depends on the quality of the interview, biography, graph extraction, and mental-model formulation. Sparse interviews may produce thin or generic models. Fourth, autobiographical personalization creates privacy risks for both users and third parties, motivating our choice to avoid demographic collection and to expose deletion controls. Future work will study longer-term retention, richer user correction workflows, stronger privacy-preserving storage, and blinded comparisons between user, clone, and generic AI reflections.
+
+\section{Contributions}
+
+RewindAI contributes: (1) an end-to-end workflow that connects natural autobiographical dialogue, relationship-and-decision graphs, and a revisable mental-model draft; (2) a three-condition study design that separates self-reflection, generic AI reflection, and personalized clone reflection; and (3) a measurement strategy that treats clone agreement, mismatch categories, user correction, and privacy feedback as central outcomes rather than assuming that a personalized model is automatically useful. More broadly, RewindAI frames personalization as an inspectable and revisable interpretation process, not a hidden profile behind fluent advice.
+
+\clearpage
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+\end{document}

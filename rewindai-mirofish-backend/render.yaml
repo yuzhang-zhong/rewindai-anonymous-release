@@ -1,0 +1,34 @@
+# Render Blueprint for deploying the MiroFish repository as backend-only.
+# Keep rootDir pinned to backend so RewindAI does not build the full MiroFish app.
+
+services:
+  - type: web
+    name: rewindai-mirofish-backend
+    runtime: docker
+    plan: starter
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    healthCheckPath: /health
+    disk:
+      name: mirofish-uploads
+      mountPath: /app/uploads
+      sizeGB: 1
+    envVars:
+      - key: FLASK_DEBUG
+        value: "false"
+      - key: MIROFISH_ENV
+        value: production
+      - key: PORT
+        value: "5001"
+      - key: MIROFISH_CORS_ORIGINS
+        value: https://your-frontend.example
+      - key: SECRET_KEY
+        sync: false
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_BASE_URL
+        value: https://api.openai.com/v1
+      - key: LLM_MODEL_NAME
+        value: gpt-4o-mini
+      - key: ZEP_API_KEY
+        sync: false

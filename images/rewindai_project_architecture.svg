@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">RewindAI Project Architecture</title>
+  <desc id="desc">A publication-style architecture diagram showing RewindAI's participant flow, autobiographical grounding stack, simulation-test loop, and research data pathway.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#405064"/>
+    </marker>
+    <marker id="arrowDashed" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#5b6677"/>
+    </marker>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: 700 28px Arial, Helvetica, sans-serif; fill: #173a2f; letter-spacing: .2px; }
+      .subtitle { font: 400 14px Arial, Helvetica, sans-serif; fill: #5f6d68; }
+      .band-label { font: 700 14px Arial, Helvetica, sans-serif; fill: #42675b; letter-spacing: 1.2px; text-transform: uppercase; }
+      .box-title { font: 700 17px Arial, Helvetica, sans-serif; fill: #24362f; }
+      .box-small { font: 400 12px Arial, Helvetica, sans-serif; fill: #61716b; }
+      .chip-text { font: 700 13px Arial, Helvetica, sans-serif; fill: #2c3e38; }
+      .edge-text { font: 400 12px Arial, Helvetica, sans-serif; fill: #53606f; }
+      .note-text { font: 400 12px Arial, Helvetica, sans-serif; fill: #6b756f; }
+      .node { stroke-width: 1.4; rx: 18; ry: 18; }
+      .core { fill: #eef8f3; stroke: #8fc1a9; }
+      .ground { fill: #f7fbff; stroke: #8fb3d9; }
+      .sim { fill: #fff9ed; stroke: #d8b66b; }
+      .data { fill: #f7f3ff; stroke: #a899d8; }
+      .person { fill: #f5fbf8; stroke: #9fcbb8; }
+      .condition { fill: #ffffff; stroke: #c8d7cf; }
+      .anonymous { fill: #fbfbfb; stroke: #d0d0d0; }
+      .arrow { fill: none; stroke: #405064; stroke-width: 1.55; marker-end: url(#arrow); }
+      .arrow-soft { fill: none; stroke: #607286; stroke-width: 1.35; marker-end: url(#arrow); }
+      .arrow-dashed { fill: none; stroke: #5b6677; stroke-width: 1.35; stroke-dasharray: 6 5; marker-end: url(#arrowDashed); }
+      .band { fill: none; stroke: #e4ebe7; stroke-width: 1.2; rx: 24; ry: 24; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="900"/>
+
+  <text class="title" x="60" y="58">RewindAI Project Architecture</text>
+  <text class="subtitle" x="60" y="84">Natural autobiographical grounding, public campus simulation, condition-specific reflection, and privacy-aware study records.</text>
+
+  <rect class="band" x="42" y="112" width="1516" height="146"/>
+  <text class="band-label" x="68" y="142">Entry and Condition Assignment</text>
+
+  <rect class="band" x="42" y="288" width="1516" height="214"/>
+  <text class="band-label" x="68" y="318">Autobiographical Grounding Stack</text>
+
+  <rect class="band" x="42" y="532" width="1516" height="196"/>
+  <text class="band-label" x="68" y="562">Public Simulation and Reflection Loop</text>
+
+  <rect class="band" x="1045" y="744" width="513" height="112"/>
+  <text class="band-label" x="1072" y="776">Study Data and Administration</text>
+
+  <!-- Entry nodes -->
+  <rect class="node person" x="72" y="166" width="170" height="60"/>
+  <text class="box-title" x="108" y="202">Participant</text>
+
+  <rect class="node core" x="308" y="154" width="214" height="84"/>
+  <text class="box-title" x="340" y="187">Group Assignment</text>
+  <text class="box-small" x="340" y="211">pseudonymous account</text>
+
+  <rect class="node core" x="615" y="154" width="250" height="84"/>
+  <text class="box-title" x="650" y="187">RewindAI Web Cockpit</text>
+  <text class="box-small" x="650" y="211">main participant interface</text>
+
+  <path class="arrow" d="M242 196 C268 196, 280 196, 308 196"/>
+  <text class="edge-text" x="259" y="185">registers</text>
+  <path class="arrow" d="M522 196 C556 196, 580 196, 615 196"/>
+  <text class="edge-text" x="546" y="185">selects condition</text>
+
+  <!-- Condition chips -->
+  <rect class="node condition" x="945" y="130" width="205" height="42"/>
+  <text class="chip-text" x="970" y="156">Group 1: Self Reflection</text>
+
+  <rect class="node condition" x="945" y="182" width="230" height="42"/>
+  <text class="chip-text" x="970" y="208">Group 2: Generic AI Reflection</text>
+
+  <rect class="node condition" x="1210" y="130" width="232" height="42"/>
+  <text class="chip-text" x="1234" y="156">Group 3: RewindAI Clone</text>
+
+  <rect class="node anonymous" x="1210" y="182" width="210" height="42"/>
+  <text class="chip-text" x="1234" y="208">Anonymous Experience</text>
+
+  <path class="arrow-dashed" d="M865 177 C900 157, 915 151, 945 151"/>
+  <path class="arrow-dashed" d="M865 193 C900 199, 915 203, 945 203"/>
+  <path class="arrow-dashed" d="M865 176 C1030 132, 1125 134, 1210 151"/>
+  <path class="arrow-dashed" d="M865 205 C1030 220, 1125 216, 1210 203"/>
+  <text class="edge-text" x="1432" y="207">full experience</text>
+
+  <!-- Grounding stack -->
+  <rect class="node ground" x="158" y="358" width="190" height="74"/>
+  <text class="box-title" x="193" y="390">Natural Interview</text>
+  <text class="box-small" x="193" y="413">turning points and trade-offs</text>
+
+  <rect class="node ground" x="430" y="348" width="226" height="94"/>
+  <text class="box-title" x="474" y="384">StorySage Backend</text>
+  <text class="box-small" x="474" y="407">agents, APIs, storage</text>
+
+  <rect class="node ground" x="760" y="320" width="190" height="70"/>
+  <text class="box-title" x="811" y="354">Biography</text>
+  <text class="box-small" x="798" y="375">decision logic analysis</text>
+
+  <rect class="node ground" x="735" y="420" width="240" height="70"/>
+  <text class="box-title" x="761" y="452">Relationship and</text>
+  <text class="box-title" x="774" y="475">Decision Graph</text>
+
+  <rect class="node data" x="1068" y="370" width="218" height="86"/>
+  <text class="box-title" x="1110" y="404">Mental Model Draft</text>
+  <text class="box-small" x="1102" y="428">tentative decision policies</text>
+
+  <path class="arrow-dashed" d="M1318 172 C1318 256, 347 280, 266 358"/>
+  <text class="edge-text" x="490" y="304">conducts</text>
+  <path class="arrow-dashed" d="M1318 224 C1318 270, 365 285, 282 358"/>
+
+  <path class="arrow" d="M348 395 C380 395, 398 395, 430 395"/>
+  <text class="edge-text" x="366" y="383">conducts</text>
+
+  <path class="arrow" d="M656 374 C700 355, 725 354, 760 354"/>
+  <text class="edge-text" x="690" y="345">writes</text>
+
+  <path class="arrow" d="M656 417 C692 447, 710 456, 735 456"/>
+  <text class="edge-text" x="686" y="450">extracts</text>
+
+  <path class="arrow-soft" d="M950 355 C1001 366, 1034 384, 1068 403"/>
+  <path class="arrow-soft" d="M975 454 C1015 446, 1040 433, 1068 421"/>
+  <text class="edge-text" x="1001" y="374">formulates</text>
+
+  <!-- Simulation loop -->
+  <rect class="node sim" x="112" y="608" width="194" height="66"/>
+  <text class="box-title" x="152" y="641">Public Campus Deck</text>
+
+  <rect class="node sim" x="398" y="592" width="190" height="86"/>
+  <text class="box-title" x="436" y="626">simulation-test</text>
+  <text class="box-small" x="431" y="650">shared campus cards</text>
+
+  <rect class="node sim" x="690" y="592" width="166" height="86"/>
+  <text class="box-title" x="729" y="626">Run 1 Trace</text>
+  <text class="box-small" x="724" y="650">choices and outcomes</text>
+
+  <rect class="node core" x="948" y="592" width="224" height="86"/>
+  <text class="box-title" x="986" y="626">Reflection Support</text>
+  <text class="box-small" x="982" y="650">self, generic AI, or clone</text>
+
+  <rect class="node sim" x="1272" y="592" width="166" height="86"/>
+  <text class="box-title" x="1311" y="626">Run 2 Trace</text>
+  <text class="box-small" x="1304" y="650">replay behavior</text>
+
+  <path class="arrow" d="M740 238 C740 350, 493 486, 493 592"/>
+  <text class="edge-text" x="575" y="518">launches</text>
+
+  <path class="arrow" d="M306 641 C340 641, 363 641, 398 641"/>
+  <text class="edge-text" x="314" y="628">samples public cards</text>
+
+  <path class="arrow" d="M588 635 C626 635, 652 635, 690 635"/>
+  <text class="edge-text" x="617" y="623">syncs trace</text>
+
+  <path class="arrow" d="M856 635 C892 635, 913 635, 948 635"/>
+  <text class="edge-text" x="875" y="623">summarizes</text>
+
+  <path class="arrow" d="M1172 635 C1206 635, 1236 635, 1272 635"/>
+  <text class="edge-text" x="1209" y="623">replays</text>
+
+  <path class="arrow-soft" d="M1272 671 C1110 736, 687 722, 530 678"/>
+  <text class="edge-text" x="884" y="722">second run through simulation-test</text>
+
+  <path class="arrow-soft" d="M773 592 C750 504, 644 475, 585 442"/>
+  <text class="edge-text" x="654" y="529">syncs trace</text>
+
+  <path class="arrow-soft" d="M1355 592 C1332 494, 722 500, 606 442"/>
+  <text class="edge-text" x="1026" y="520">syncs trace</text>
+
+  <!-- Condition-specific reflection routes -->
+  <path class="arrow-dashed" d="M1048 172 C1048 300, 1018 470, 1018 592"/>
+  <text class="edge-text" x="1026" y="542">self notes</text>
+
+  <path class="arrow-dashed" d="M1060 224 C1088 350, 1096 472, 1096 592"/>
+  <text class="edge-text" x="1100" y="538">uses report only</text>
+
+  <path class="arrow-dashed" d="M1286 172 C1288 326, 1180 472, 1132 592"/>
+  <text class="edge-text" x="1190" y="542">uses model and trace</text>
+
+  <path class="arrow-dashed" d="M1177 456 C1177 498, 1162 552, 1132 592"/>
+  <text class="edge-text" x="1192" y="526">uses model and trace</text>
+
+  <!-- Data and admin -->
+  <rect class="node data" x="1104" y="800" width="190" height="42"/>
+  <text class="box-title" x="1133" y="827">Research Dataset</text>
+
+  <rect class="node data" x="1360" y="800" width="160" height="42"/>
+  <text class="box-title" x="1384" y="827">Admin Dashboard</text>
+
+  <path class="arrow-soft" d="M543 442 C620 752, 958 808, 1104 821"/>
+  <text class="edge-text" x="830" y="781">aggregates</text>
+
+  <path class="arrow-soft" d="M773 678 C843 760, 1003 800, 1104 817"/>
+  <path class="arrow-soft" d="M1355 678 C1307 742, 1256 779, 1225 800"/>
+  <text class="edge-text" x="1268" y="748">aggregates</text>
+
+  <path class="arrow-soft" d="M1294 821 C1318 821, 1337 821, 1360 821"/>
+  <text class="edge-text" x="1307" y="810">summarizes</text>
+
+  <path class="arrow-dashed" d="M1440 800 C1440 760, 1240 760, 1198 800"/>
+  <text class="edge-text" x="1288" y="750">deletion controls</text>
+
+  <path class="arrow-dashed" d="M1210 151 C1170 100, 1110 102, 1086 148 C1048 220, 1115 704, 1146 800"/>
+  <text class="edge-text" x="1110" y="116">clone similarity</text>
+
+  <text class="note-text" x="1068" y="872">Admin views aggregate metadata by default; raw autobiographical text stays outside the figure.</text>
+</svg>

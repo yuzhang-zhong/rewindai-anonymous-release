@@ -1,0 +1,120 @@
+name: RewindAI StorySage backend image
+
+on:
+  pull_request:
+    paths:
+      - "Dockerfile"
+      - "docker-entrypoint.sh"
+      - "requirements.production.txt"
+      - "src/**"
+      - ".dockerignore"
+      - ".github/workflows/rewindai-backend-image.yml"
+  push:
+    branches: ["main"]
+    tags: ["rewindai-storysage-*"]
+  workflow_dispatch:
+    inputs:
+      push_image:
+        description: "Push image to GHCR after a successful build"
+        required: false
+        default: "false"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    name: Build StorySage backend container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Decide whether to push
+        id: publish
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == refs/tags/rewindai-storysage-* ]]; then
+            echo "push=true" >> "$GITHUB_OUTPUT"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.push_image }}" == "true" ]]; then
+            echo "push=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "push=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Log in to GHCR
+        if: steps.publish.outputs.push == 'true'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/rewindai-storysage-backend
+          tags: |
+            type=ref,event=tag
+            type=sha
+            type=raw,value=latest,enable=${{ steps.publish.outputs.push == 'true' }}
+
+      - name: Build backend image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: ${{ steps.publish.outputs.push == 'true' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: mode=max
+          sbom: true
+
+      - name: Write image digest summary
+        shell: bash
+        run: |
+          {
+            echo "## RewindAI StorySage backend image"
+            echo ""
+            echo "- Pushed: \`${{ steps.publish.outputs.push }}\`"
+            echo "- Tags:"
+            echo '```'
+            echo "${{ steps.meta.outputs.tags }}"
+            echo '```'
+            echo "- Digest: \`${{ steps.build.outputs.digest }}\`"
+            echo ""
+            echo "Use the digest-pinned reference for strict go-live, for example:"
+            echo '```'
+            echo "ghcr.io/${{ github.repository_owner }}/rewindai-storysage-backend@${{ steps.build.outputs.digest }}"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Write image evidence artifact
+        shell: bash
+        run: |
+          {
+            echo "component=StorySage"
+            echo "repository=${{ github.repository }}"
+            echo "workflow=${{ github.workflow }}"
+            echo "run_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "pushed=${{ steps.publish.outputs.push }}"
+            echo "digest=${{ steps.build.outputs.digest }}"
+            echo "image_ref=ghcr.io/${{ github.repository_owner }}/rewindai-storysage-backend@${{ steps.build.outputs.digest }}"
+          } > rewindai-storysage-backend-image-evidence.txt
+
+      - name: Upload image evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rewindai-storysage-backend-image-evidence
+          path: rewindai-storysage-backend-image-evidence.txt
+          if-no-files-found: error
+          retention-days: 30

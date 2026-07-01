@@ -1,0 +1,83 @@
+# Render Blueprint example for backend-only RewindAI services.
+# Replace placeholders in the Render dashboard. Do not commit real secrets.
+
+services:
+  - type: web
+    name: rewindai-mirofish-backend
+    runtime: docker
+    plan: starter
+    rootDir: MiroFish/backend
+    dockerfilePath: MiroFish/backend/Dockerfile
+    dockerContext: MiroFish/backend
+    healthCheckPath: /health
+    disk:
+      name: mirofish-uploads
+      mountPath: /app/uploads
+      sizeGB: 1
+    envVars:
+      - key: FLASK_DEBUG
+        value: "false"
+      - key: MIROFISH_ENV
+        value: production
+      - key: PORT
+        value: "5001"
+      - key: MIROFISH_CORS_ORIGINS
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_BASE_URL
+        value: https://api.openai.com/v1
+      - key: LLM_MODEL_NAME
+        value: gpt-4o-mini
+      - key: ZEP_API_KEY
+        sync: false
+
+  - type: web
+    name: rewindai-storysage-backend
+    runtime: docker
+    plan: starter
+    rootDir: StorySage
+    dockerfilePath: StorySage/Dockerfile
+    dockerContext: StorySage
+    healthCheckPath: /health
+    disk:
+      name: storysage-data
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: STORYSAGE_ENV
+        value: production
+      - key: STORYSAGE_AUTO_SETUP_DB
+        value: "true"
+      - key: STORYSAGE_JWT_SECRET
+        sync: false
+      - key: STORYSAGE_CORS_ORIGINS
+        sync: false
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "10080"
+      - key: MODEL_NAME
+        value: gpt-4o
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DATA_DIR
+        value: /app/data
+      - key: LOGS_DIR
+        value: /app/data/logs
+      - key: USER_AGENT_PROFILES_DIR
+        value: /app/data/sample_user_profiles
+      - key: DATABASE_URL
+        value: sqlite:////app/data/interview_app.db
+      - key: MIROFISH_GRAPH_SYNC_ENABLED
+        value: "true"
+      - key: MIROFISH_BASE_URL
+        sync: false
+      - key: MIROFISH_HTTP_TIMEOUT_SEC
+        value: "60"
+      - key: MIROFISH_TASK_POLL_INTERVAL_SEC
+        value: "3"
+      - key: MIROFISH_GRAPH_BUILD_TIMEOUT_SEC
+        value: "900"
+      - key: MIROFISH_GRAPH_CACHE_TTL_SEC
+        value: "120"

@@ -1,0 +1,14 @@
+# MiroFish production backend dependencies.
+# OASIS social-simulation scripts use optional dependencies and are intentionally
+# excluded from the backend-only production image.
+
+flask>=3.0.0
+flask-cors>=6.0.0
+gunicorn>=22.0.0
+openai>=1.0.0
+zep-cloud==3.13.0
+PyMuPDF>=1.24.0
+charset-normalizer>=3.0.0
+chardet>=5.0.0
+python-dotenv>=1.2.2
+pydantic>=2.0.0
