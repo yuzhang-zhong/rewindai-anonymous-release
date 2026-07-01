@@ -134,8 +134,8 @@ def main():
     Main function to run the topic extraction process.
 
     Example usage:
-    python src/utils/topic_extractor.py --user_id coates
-    python -m src.utils.topic_extractor --user_id coates
+    python src/utils/topic_extractor.py --user_id <user_id>
+    python -m src.utils.topic_extractor --user_id <user_id>
     """
     # Set up argument parser
     parser = argparse.ArgumentParser(description='Extract topics from user profiles')

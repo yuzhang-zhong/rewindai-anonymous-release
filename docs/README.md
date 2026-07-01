@@ -1,12 +1,6 @@
 # Documentation
 
-This folder contains supporting design and technical notes.
+This folder is intentionally minimal in the anonymous release.
 
-Start with:
-
-- `../RUN_LOGIC.md` for the demo sequence.
-- `../REWINDAI_PROJECT_TECHNICAL_DOCUMENTATION.md` for the fuller architecture,
-  agent, graph, and study-design description.
-
-Legacy notes are kept for reference and should not be treated as the primary
-setup guide.
+Detailed drafts, legacy notes, paper text, and local-path references are not
+included here. Use the root `README.md` and module-level README files for setup.

@@ -151,7 +151,6 @@ npm run smoke:bridge
 
 ## More Documentation
 
-- `RUN_LOGIC.md` explains the local demo sequence.
-- `REWINDAI_ACCEPTANCE_MATRIX.md` lists verification gates.
-- `REWINDAI_PROJECT_TECHNICAL_DOCUMENTATION.md` gives the fuller project,
-  agent, graph, and research-design documentation.
+- Each major folder has a short local `README.md`.
+- The code is organized to keep the main project page concise for anonymous
+  review.
