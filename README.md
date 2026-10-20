@@ -1,30 +1,52 @@
 # RewindAI
 
-RewindAI is a research prototype for decision-centered autobiographical
-grounding. It combines a natural interview, biography generation, a
-relationship/decision graph, a plain-language mental model, a campus decision
-simulation, and reflection support.
+**Inspectable and Revisable Autobiographical Clones for Reflective Social Decisions**
 
-The core question is:
+**Accepted to the UIST 2026 Poster Track.**  
+Yuzhang Zhong, Min Kim, and Rangjiacheng Lu
 
-> Can personal grounding from natural language help people inspect how they make
-> decisions, reflect on alternative paths, and make different choices in a later
-> simulation run?
+[Project overview](https://yuzhang-zhong.github.io/portfolio/rewindai) · [Publication details](https://yuzhang-zhong.github.io/publication/2026-rewindai) · [System overview](#system-overview) · [Local development](#local-development)
 
-This is an anonymous release. It excludes real API keys, database passwords,
-local machine paths, hosting-owner URLs, `.env` files, logs, local databases, and
-credential files.
+RewindAI is a research prototype that helps people inspect and revise how an AI
+clone represents their social decisions. A natural-language interview becomes
+an editable biography, a relationship/decision graph, and a plain-language
+mental model. A campus decision simulation then gives users a concrete setting
+for reflecting on choices and exploring a different path.
+
+### What you can explore
+
+- **Inspect personal grounding:** review the experiences, relationships, values,
+  and trade-offs behind a generated model.
+- **Revise the representation:** edit biography content and revisit model
+  hypotheses rather than treating the clone as a fixed portrait.
+- **Reflect and replay:** examine a simulation trace with self-reflection,
+  generic AI, or clone-style support, then compare a second run.
+
+The research question is whether autobiographical grounding can help people
+understand their decisions and reflect on alternatives. Generated models are
+hypotheses for reflection, not authoritative judgments about a person.
+
+This public code snapshot was originally prepared for anonymous review. It
+excludes real API keys, database passwords, local machine paths, hosting-owner
+URLs, `.env` files, logs, local databases, and credential files. No hosted demo
+or provider credentials are bundled. See the [release limitation](#release-limitation)
+before attempting the full local experience.
 
 ## System Overview
 
-RewindAI has three main parts:
+![RewindAI architecture showing the web cockpit, autobiographical grounding, campus simulation, and reflection loop](images/rewindai_framework_architecture_designed.png)
+
+*System architecture: interview evidence connects the biography and decision
+graph to the simulation and reflection loop.*
+
+RewindAI has three core applications and one optional service:
 
 | Module | Purpose |
 | --- | --- |
-| `StorySage/` | Backend for interviews, biographies, graph/model generation, reflection, trace ingestion, admin summaries, and persistence. |
-| `StorySage_Frontend/` | Main RewindAI web cockpit and admin dashboard. |
-| `Rewind-reigns/` | `simulation-test`, a campus decision game that records behavioral traces. |
-| `rewindai-mirofish-backend/` | Optional backend-only graph compatibility service. |
+| [`StorySage/`](StorySage/readme.md) | Backend for interviews, biographies, graph/model generation, reflection, trace ingestion, admin summaries, and persistence. |
+| [`StorySage_Frontend/`](StorySage_Frontend/README.md) | Main RewindAI web cockpit and admin dashboard. |
+| [`Rewind-reigns/`](Rewind-reigns/README.md) | `simulation-test`, a campus decision game that records behavioral traces. |
+| [`rewindai-mirofish-backend/`](rewindai-mirofish-backend/README.md) | Optional backend-only graph compatibility service. |
 
 The intended flow is:
 
@@ -36,6 +58,8 @@ The intended flow is:
 6. The user replays the simulation and the system summarizes changes.
 
 ## Research Conditions
+
+These modes describe the implemented study flows, not reported study outcomes.
 
 | Mode | Flow |
 | --- | --- |
@@ -61,7 +85,8 @@ The backend separates the work across lightweight agents:
   reflection.
 
 Interview/biography evidence is treated as autobiographical grounding.
-simulation-test traces are treated as tentative behavioral signals.
+Simulation traces are treated as tentative behavioral signals, not as ground truth
+about a person's motivations.
 
 ## Privacy Boundary
 
@@ -79,23 +104,62 @@ Do not commit:
 Configure real values through untracked local environment files or the hosting
 platform environment-variable UI.
 
-Example variables:
+For local development, put backend values in an untracked `StorySage/.env`
+file. Replace the placeholders with your own values:
 
 ```env
-OPENAI_API_KEY=<model-provider-key>
-DATABASE_URL=<postgres-or-local-sqlite-url>
-JWT_SECRET_KEY=<long-random-secret>
-REWINDAI_ADMIN_TOKEN=<admin-token>
+MODEL_NAME=gpt-4o
+OPENAI_API_KEY=<your-model-provider-key>
+DATABASE_URL=sqlite:///./data/interview_app.db
+DATA_DIR=data
+LOGS_DIR=logs
+STORYSAGE_JWT_SECRET=<your-long-random-secret>
+REWINDAI_ADMIN_TOKEN=<your-admin-token>
 PUBLIC_FRONTEND_URL=http://127.0.0.1:5173
+MIROFISH_GRAPH_SYNC_ENABLED=false
+```
+
+For the main frontend, use `StorySage_Frontend/.env.local`:
+
+```env
 VITE_API_BASE_URL=http://127.0.0.1:8000
 VITE_REWIND_APP_URL=http://127.0.0.1:5174
-MIROFISH_GRAPH_SYNC_ENABLED=false
-MIROFISH_BASE_URL=<optional-public-graph-backend-url>
 ```
+
+The optional graph service is not needed for the basic configuration above. If
+you enable graph synchronization, configure `MIROFISH_BASE_URL` with the backend
+service you operate. Model-backed features require provider credentials and may
+incur API usage charges.
 
 Never expose provider keys through frontend `VITE_*` variables.
 
 ## Local Development
+
+### Release limitation
+
+The current snapshot imports `utils.llm.gcp_credentials` from the provider
+status and Vertex-model modules, but does not include
+`StorySage/src/utils/llm/gcp_credentials.py`. The backend's server import path
+therefore needs that helper restored before the full application can start.
+The commands below document the intended setup; this is not yet a verified
+clean-checkout, end-to-end demo.
+
+### Prerequisites
+
+- Python 3.12, matching the backend's Docker runtime.
+- Node.js 22.12 or newer and npm, compatible with the frontend's locked Vite version.
+- Your own model-provider credentials, configured on the backend only.
+
+Clone the public repository:
+
+```bash
+git clone https://github.com/yuzhang-zhong/rewindai-anonymous-release.git
+cd rewindai-anonymous-release
+```
+
+After resolving the release limitation, configure the local environment files
+above and start the following services in separate terminals. Run each command
+block from the repository root.
 
 Start the backend:
 
@@ -130,7 +194,8 @@ Default local URLs:
 
 ## Verification
 
-Useful smoke checks:
+The repository includes the following smoke checks. These are commands to run,
+not a claim that they currently pass on a fresh checkout:
 
 ```powershell
 cd StorySage
@@ -151,6 +216,16 @@ npm run smoke:bridge
 
 ## More Documentation
 
-- Each major folder has a short local `README.md`.
-- The code is organized to keep the main project page concise for anonymous
-  review.
+- [Backend](StorySage/readme.md)
+- [Web cockpit](StorySage_Frontend/README.md)
+- [Campus simulation](Rewind-reigns/README.md)
+- [Optional graph service](rewindai-mirofish-backend/README.md)
+- [Deployment notes](deploy/README.md)
+- [Architecture figures](images/README.md)
+
+## Acknowledgments
+
+RewindAI builds on [StorySage](https://github.com/ShayanTalaei/StorySage)
+and [StorySage Frontend](https://github.com/Hello-Imagine/StorySage_Frontend).
+We thank their authors and contributors for the interview, biography, and
+interface foundations.
