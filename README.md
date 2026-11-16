@@ -2,6 +2,8 @@
 
 # RewindAI
 
+**English** · [简体中文](README.zh-CN.md)
+
 **Inspectable and Revisable Autobiographical Clones for Reflective Social Decisions**
 
 [![Python](https://img.shields.io/badge/Backend-Python-3776AB)](StorySage/)
