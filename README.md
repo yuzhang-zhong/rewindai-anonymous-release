@@ -1,11 +1,19 @@
+<div align="center">
+
 # RewindAI
 
 **Inspectable and Revisable Autobiographical Clones for Reflective Social Decisions**
 
+[![Python](https://img.shields.io/badge/Backend-Python-3776AB)](StorySage/)
+[![React](https://img.shields.io/badge/Frontend-React-149eca)](StorySage_Frontend/package.json)
+[![Release](https://img.shields.io/badge/Snapshot-Anonymous_review-6d28d9)](#release-limitation)
+
 **Accepted to the UIST 2026 Poster Track.**  
 Yuzhang Zhong, Min Kim, and Rangjiacheng Lu
 
-[Project overview](https://yuzhang-zhong.github.io/portfolio/rewindai) · [Publication details](https://yuzhang-zhong.github.io/publication/2026-rewindai) · [System overview](#system-overview) · [Local development](#local-development)
+[Project overview](https://yuzhang-zhong.github.io/portfolio/rewindai) · [Publication details](https://yuzhang-zhong.github.io/publication/2026-rewindai) · [System overview](#system-overview) · [Local development](#local-development) · [Privacy](#privacy-boundary) · [Docs](#more-documentation)
+
+</div>
 
 RewindAI is a research prototype that helps people inspect and revise how an AI
 clone represents their social decisions. A natural-language interview becomes
@@ -13,7 +21,7 @@ an editable biography, a relationship/decision graph, and a plain-language
 mental model. A campus decision simulation then gives users a concrete setting
 for reflecting on choices and exploring a different path.
 
-### What you can explore
+## What you can explore
 
 - **Inspect personal grounding:** review the experiences, relationships, values,
   and trade-offs behind a generated model.
@@ -31,6 +39,12 @@ excludes real API keys, database passwords, local machine paths, hosting-owner
 URLs, `.env` files, logs, local databases, and credential files. No hosted demo
 or provider credentials are bundled. See the [release limitation](#release-limitation)
 before attempting the full local experience.
+
+> [!IMPORTANT]
+> **This is a research snapshot, not a ready-to-run hosted release.** The
+> backend currently needs a missing credentials helper restored before it can
+> start. Read the [release limitation](#release-limitation) before setup;
+> generated personal models remain hypotheses for reflection.
 
 ## System Overview
 
